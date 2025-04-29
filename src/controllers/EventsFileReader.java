@@ -3,13 +3,12 @@ package controllers;
 import models.EventModel;
 
 import java.io.*;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
-public class EventController {
+public class EventsFileReader {
 
     String[] swicthes = {"{", "}"};
 
@@ -66,7 +65,7 @@ public class EventController {
     }
 
     public static void main(String[] args) {
-        List<EventModel> events = new EventController().getEvents();
+        List<EventModel> events = new EventsFileReader().getEvents();
         for (EventModel event : events) {
             System.out.println(event.getName());
         }
