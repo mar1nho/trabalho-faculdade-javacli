@@ -10,16 +10,14 @@ import java.util.List;
 
 public class EventsFileReader {
 
-    String[] swicthes = {"{", "}"};
+    private String[] swicthes = {"{", "}"};
 
-    File file = new File("src/controllers/data/events.data");
+    protected File file = new File("src/controllers/data/events.data");
 
     public List<EventModel> getEvents() {
         ArrayList<EventModel> events = new ArrayList<>();
-
         try(BufferedReader br = new BufferedReader(new FileReader(file))) {
             String line;
-
             while ((line = br.readLine()) != null) {
                 boolean isSwitch = false;
 
@@ -29,7 +27,6 @@ public class EventsFileReader {
                         break;
                     }
                 }
-
                 if (!isSwitch) {
                     String[] data = line.split(";");
                     int dataLength = data.length;
@@ -51,23 +48,11 @@ public class EventsFileReader {
                     }
                 }
             }
-
-
-
         } catch (IOException e) {
             System.out.println("Error reading file, technical support needed. Please contact github.com/mar1nho for further details.");
             System.out.printf("Error: %s%n", e.getMessage());
             System.out.printf("Error: %s%n", e.getCause());
-            System.out.printf("Error: %s%n", e.getMessage());
         }
-
         return events;
-    }
-
-    public static void main(String[] args) {
-        List<EventModel> events = new EventsFileReader().getEvents();
-        for (EventModel event : events) {
-            System.out.println(event.getName());
-        }
     }
 }

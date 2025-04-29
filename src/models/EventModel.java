@@ -23,6 +23,7 @@ public class EventModel {
 
     }
 
+
     public int getId() {
         return id;
     }
