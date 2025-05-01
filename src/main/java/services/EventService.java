@@ -1,11 +1,9 @@
 package services;
 
-
 import controllers.EventsFileReader;
 import controllers.EventsFileWriter;
 import models.EventModel;
 import utils.Log;
-
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
@@ -17,12 +15,12 @@ public class EventService {
     private final List<String> eventsRaw;
     private final EventsFileWriter eventsFileWriter = new EventsFileWriter();
 
-    EventService() {
+    public EventService() {
         EventsFileReader eventsFileReader = new EventsFileReader();
         eventsRaw = eventsFileReader.getEventsRawFromFile();
     }
 
-    // Função deve estar no inicializador do programa;
+    // Função para ler as linhas do arquivo events.data, formatar e devolver a lista com os objetos setados.
     public List<EventModel> loadEventListAsModel(){
         int idCount = 0;
         for (String rawEvent : eventsRaw) {
@@ -57,6 +55,7 @@ public class EventService {
         return eventList;
     }
 
+    // Função para criar/ler os eventos no arquivo, recebe um model como parâmetro.
     public void createEvent(EventModel eventModel){
         var formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
         String formattedDate = eventModel.getDate().format(formatter);

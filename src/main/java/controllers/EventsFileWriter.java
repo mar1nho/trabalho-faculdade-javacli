@@ -10,7 +10,7 @@ import java.io.IOException;
 
 public class EventsFileWriter {
 
-    protected File file = new File("src/controllers/data/events.data");
+    protected File file = new File("src/main/java/controllers/data/events.data");
 
     public void writeToFile(String formatedEvent) {
 
