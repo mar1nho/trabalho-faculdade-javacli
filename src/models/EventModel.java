@@ -10,8 +10,7 @@ public class EventModel {
     private LocalDateTime date;
     private String description;
 
-    public EventModel(int id, String name, String address, String category, LocalDateTime date, String description) {
-        this.id = id;
+    public EventModel(String name, String address, String category, LocalDateTime date, String description) {
         this.name = name;
         this.address = address;
         this.category = category;
