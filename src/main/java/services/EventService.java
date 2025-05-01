@@ -19,8 +19,6 @@ public class EventService {
         EventsFileReader eventsFileReader = new EventsFileReader();
         eventsRaw = eventsFileReader.getEventsRawFromFile();
     }
-
-    // Função para ler as linhas do arquivo events.data, formatar e devolver a lista com os objetos setados.
     public List<EventModel> loadEventListAsModel(){
         int idCount = 0;
         for (String rawEvent : eventsRaw) {
@@ -31,25 +29,24 @@ public class EventService {
                     break;
                 }
             }
-            if(!isSwitch){
+            if (!isSwitch) {
                 String[] data = rawEvent.split(";");
-                int dataLength = data.length;
-                for(int i  = 0; i < dataLength;) {
+                if (data.length >= 5) {
                     EventModel eventModel = new EventModel();
-                    eventModel.setId(idCount);
-                    eventModel.setName(data[i]);
-                    eventModel.setAddress(data[i+1]);
-                    eventModel.setCategory(data[i+2]);
-                    eventModel.setDescription(data[i+4]);
-                    var date = data[i+3];
-                    var formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
-                    var formatedDate = LocalDateTime.parse(date, formatter);
+                    eventModel.setId(idCount++);
+                    eventModel.setName(data[0]);
+                    eventModel.setAddress(data[1]);
+                    eventModel.setCategory(data[2]);
+                    eventModel.setDescription(data[4]);
+
+                    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
+                    LocalDateTime formatedDate = LocalDateTime.parse(data[3], formatter);
                     eventModel.setDate(formatedDate);
+
                     this.eventList.add(eventModel);
-                    idCount++;
-                    break;
                 }
             }
+
         }
         eventList.sort(Comparator.comparing(EventModel::getId));
         return eventList;
