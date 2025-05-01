@@ -20,4 +20,13 @@ public class UserService {
     public List<UserModel> getAllUsers(){
         return userController.loadAllUsers();
     }
+
+    public boolean loginAuthentication(String username, String password){
+        boolean hasResult = false;
+        List<UserModel> users = userController.loadAllUsers();
+        for(UserModel user : users){
+            hasResult = user.getUsername().equals(username) && user.getPassword().equals(password);
+        }
+        return hasResult;
+    }
 }
