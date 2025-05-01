@@ -4,6 +4,8 @@ package services;
 import controllers.EventsFileReader;
 import controllers.EventsFileWriter;
 import models.EventModel;
+import utils.Log;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
@@ -66,6 +68,6 @@ public class EventService {
                 eventModel.getDescription()
         );
         eventsFileWriter.writeToFile(line);
-        System.out.println("Evento criado com sucesso: " + line);
+        Log.info(String.format("Criado evento com nome %s", eventModel.getName()));
     }
 }
