@@ -39,7 +39,7 @@ A aplicação simula uma plataforma de eventos que permite ao usuário:
 
 ### 1. Para rodar:
 ```bash
-git clone https://github.com/seuusuario/tarolando.git
+git clone https://github.com/mar1nho/trabalho-faculdade-javacli.git
 cd tarolando
 mvn compile
 mvn exec:java -Dexec.mainClass="Main"
