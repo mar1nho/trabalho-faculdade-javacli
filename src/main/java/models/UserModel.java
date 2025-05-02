@@ -1,18 +1,18 @@
 package models;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Map;
 
 public class UserModel {
     private String username;
     private String password;
+    private String[][] address;
     private Map<Integer, String> eventsConfirmed;
 
-    public UserModel(String username, String password, Map<Integer, String> eventsConfirmed) {
+    public UserModel(String username, String password, Map<Integer, String> eventsConfirmed, String[][] address) {
         this.username = username;
         this.password = password;
         this.eventsConfirmed = eventsConfirmed;
+        this.address = address;
     }
 
     public String getUsername() {
@@ -29,6 +29,14 @@ public class UserModel {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String[][] getAddress() {
+        return address;
+    }
+
+    public void setAddress(String[][] address) {
+        this.address = address;
     }
 
     public Map<Integer, String> getEventsConfirmed() {

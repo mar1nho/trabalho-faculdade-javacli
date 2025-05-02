@@ -58,10 +58,20 @@ public class UserScreenCLI {
         String res = Log.getUserInput();
 
         switch (res) {
-            case "1", "4": Log.info("NOT IMPLEMENTED");break;
+            case "1": Log.info("NOT IMPLEMENTED");break;
             case "2": showEvents();  break;
             case "3": pastEvents(); break;
+            case "4": nextToMe(); break;
         }
+    }
+
+    public void nextToMe(){
+        Log.ascii();
+        Log.info("Username: " + mainUser.getUsername());
+        Log.info("Próximos ao bairro de " + mainUser.getAddress());
+
+
+        eventsGeneralStats();
     }
 
     public void showEvents(){
@@ -72,7 +82,7 @@ public class UserScreenCLI {
                 LocalDateTime dateTime = eventModel.getDate(); // Supondo que seja LocalDateTime
                 DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
                 String formattedDateTime = dateTime.format(formatter);
-                Log.info(String.format("Evento: %s   -   Endereço: %s   -   Data: %s", eventModel.getName(), eventModel.getAddress(), formattedDateTime));
+                Log.info(String.format("ID: %d  -  Evento: %s   -   Endereço: %s   -   Data: %s",eventModel.getId(), eventModel.getName(), eventModel.getAddress(), formattedDateTime));
             }
         }
         try {
@@ -91,7 +101,7 @@ public class UserScreenCLI {
                 LocalDateTime dateTime = eventModel.getDate(); // Supondo que seja LocalDateTime
                 DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
                 String formattedDateTime = dateTime.format(formatter);
-                Log.info(String.format("Evento: %s   -   Endereço: %s   -   Data: %s", eventModel.getName(), eventModel.getAddress(), formattedDateTime));
+                Log.info(String.format("ID: %d  -  Evento: %s   -   Endereço: %s   -   Data: %s",eventModel.getId(), eventModel.getName(), eventModel.getAddress(), formattedDateTime));
             }
         }
         try {

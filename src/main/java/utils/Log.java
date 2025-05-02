@@ -32,6 +32,6 @@ public class Log {
 
     public static String getUserInput(){
         Scanner scanner = new Scanner(System.in);
-        return scanner.next();
+        return scanner.nextLine();
     }
 }

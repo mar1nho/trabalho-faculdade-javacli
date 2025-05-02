@@ -49,7 +49,11 @@ public class LoginCLI {
         String usr = Log.getUserInput();
         Log.input("Password: ");
         String pwd = Log.getUserInput();
-        if(userService.saveUser(new UserModel(usr,pwd, new HashMap<>()))){
+        Log.input("Bairro: ");
+        String neighborhood = Log.getUserInput();
+        Log.input("Cidade: ");
+        String city = Log.getUserInput();
+        if(userService.saveUser(new UserModel(usr,pwd, new HashMap<>(),new String[][]{{neighborhood.trim(), city.trim()}}))){
             Log.info("Parabéns, conta criada com sucesso!");
             Log.info("Retornando ao menu.");
             try {
