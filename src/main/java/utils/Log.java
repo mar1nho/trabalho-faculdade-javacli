@@ -30,7 +30,7 @@ public class Log {
                 """);
     }
 
-    public static Object getUserInput(){
+    public static String getUserInput(){
         Scanner scanner = new Scanner(System.in);
         return scanner.next();
     }

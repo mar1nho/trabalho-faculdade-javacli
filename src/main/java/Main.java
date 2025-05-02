@@ -1,6 +1,4 @@
-import services.EventService;
 import test.EventsTester;
-import utils.Log;
 
 public class Main {
 

@@ -4,6 +4,7 @@ package services;
 import controllers.UserController;
 import models.UserModel;
 
+import java.lang.management.GarbageCollectorMXBean;
 import java.util.List;
 
 public class UserService {
@@ -21,12 +22,13 @@ public class UserService {
         return userController.loadAllUsers();
     }
 
-    public boolean loginAuthentication(String username, String password){
-        boolean hasResult = false;
+    public boolean loginAuthentication(String username, String password) {
         List<UserModel> users = userController.loadAllUsers();
-        for(UserModel user : users){
-            hasResult = user.getUsername().equals(username) && user.getPassword().equals(password);
+        for (UserModel user : users) {
+            if (user.getUsername().trim().equals(username.trim()) && user.getPassword().trim().equals(password.trim())) {
+                return true;
+            }
         }
-        return hasResult;
+        return false;
     }
 }

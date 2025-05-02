@@ -1,18 +1,20 @@
 package cli;
 
+import services.UserService;
 import utils.Log;
 
 public class LoginCLI {
 
     public void mainScreen(){
         Log.ascii();
-        Log.info("Lorem ipsum dolor sit amet");
-        Log.input("Username: ");
-        String username = String.valueOf(Log.getUserInput());
-        Log.input("Password: ");
-        String password = String.valueOf(Log.getUserInput());
-        System.out.println(username);
-        System.out.println(password);
+        Log.info("Olá, entre abaixo:");
+        Log.input("Usuário: ");
+        String username = Log.getUserInput();
+        Log.input("Senha: ");
+        String password = Log.getUserInput();
+        UserService userService = new UserService();
+        boolean result = userService.loginAuthentication(username, password);
+        System.out.println(result);
     }
 
 
