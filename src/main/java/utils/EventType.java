@@ -1,10 +1,14 @@
 package utils;
 
 public enum EventType {
-    FESTAS,
-    EVENTOS,
-    ESPORTIVOS,
-    SHOWS,
-    ESTUDOS,
-    ENCONTRO
+    FESTA,
+    EVENTO,
+    ESPORTIVO,
+    SHOW,
+    ESTUDO,
+    ENCONTRO;
+
+    public static EventType[] getAllEventTypes() {
+        return values();
+    }
 }

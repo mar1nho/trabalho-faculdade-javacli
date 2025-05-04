@@ -3,6 +3,7 @@ package cli;
 import models.UserModel;
 import services.UserService;
 import utils.Log;
+import utils.Sleep;
 
 import java.util.Arrays;
 import java.util.HashMap;
@@ -35,11 +36,7 @@ public class LoginCLI implements Runnable{
             }
             default -> {
                 Log.info("Nenhuma opção reconhecida na sua resposta...");
-                try {
-                    Thread.sleep(2000);
-                } catch (InterruptedException e) {
-                    throw new RuntimeException(e);
-                }
+                Sleep.seconds(2000);
                 mainScreen();
             }
         }
@@ -69,11 +66,7 @@ public class LoginCLI implements Runnable{
         if (!isValid) {
             Log.info("Você deve inserir o código da UF do seu Estado:");
             Log.info(Arrays.toString(states));
-            try {
-                Thread.sleep(2000);
-            } catch (InterruptedException e) {
-                throw new RuntimeException(e);
-            }
+            Sleep.seconds(2000);
             registerScreen();
         }
 
@@ -81,11 +74,7 @@ public class LoginCLI implements Runnable{
 
         if(usr.isEmpty() || pwd.isEmpty() || neighborhood.isEmpty() || city.isEmpty()){
             Log.info("Informações em branco, retornando ao registro, insira informações nos campos!!");
-            try {
-                Thread.sleep(2000);
-            } catch (InterruptedException e) {
-                throw new RuntimeException(e);
-            }
+            Sleep.seconds(2000);
             registerScreen();
         }
 
@@ -93,19 +82,11 @@ public class LoginCLI implements Runnable{
         if(userService.saveUser(new UserModel(usr,pwd, new HashMap<>(),new String[][]{{neighborhood.trim(), city.trim()}}))){
             Log.info("Parabéns, conta criada com sucesso!");
             Log.info("Retornando ao menu.");
-            try {
-                Thread.sleep(2000);
-            } catch (InterruptedException e) {
-                throw new RuntimeException(e);
-            }
+            Sleep.seconds(2000);
             mainScreen();
         } else {
             Log.info("Usuário inválido, tente novamente!");
-            try {
-                Thread.sleep(2000);
-            } catch (InterruptedException e) {
-                throw new RuntimeException(e);
-            }
+            Sleep.seconds(2000);
             registerScreen();
         }
     }
@@ -117,6 +98,10 @@ public class LoginCLI implements Runnable{
         String usr = Log.getUserInput();
         Log.input("Password: ");
         String pwd = Log.getUserInput();
+
+        if (usr.equalsIgnoreCase("0")){
+            mainScreen();
+        }
 
         boolean _auth_ = userService.loginAuthentication(usr,pwd);
         if(_auth_){
@@ -131,11 +116,7 @@ public class LoginCLI implements Runnable{
             }
         } else {
             Log.info("Informações incorretas, insira credenciais válidas.");
-            try {
-                Thread.sleep(2000);
-            } catch (InterruptedException e) {
-                throw new RuntimeException(e);
-            }
+            Sleep.seconds(2000);
             loginScreen();
 
         }
@@ -145,12 +126,6 @@ public class LoginCLI implements Runnable{
     public void run() {
         while (true){
             mainScreen();
-            try {
-                Thread.sleep(1000);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-                break;
-            }
         }
     }
 }
