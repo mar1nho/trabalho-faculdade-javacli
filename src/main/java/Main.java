@@ -1,11 +1,12 @@
+import cli.LoginCLI;
 import test.EventsTester;
 
 public class Main {
 
-    private static final EventsTester tester = new EventsTester();
+    private static final LoginCLI loginCLI = new LoginCLI();
 
     public static void main(String[] args) {
-
-        tester.run();
+        Thread _init = new Thread(loginCLI);
+        _init.start();
     }
 }

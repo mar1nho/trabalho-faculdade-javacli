@@ -48,9 +48,25 @@ public class UserModel {
     }
 
     public String getAddressesString() {
-        String neighbourhood = address[0][0];
-        String city = address[1][0];
-        return String.format("%s-%s", neighbourhood, city);
+        if (address != null && address.length >= 2 && address[0].length > 0 && address[1].length > 0) {
+            String neighbourhood = address[0][0];
+            String city = address[1][0];
+            return String.format("%s-%s", neighbourhood, city);
+        }
+        return "Endereço Inválido";
     }
 
+    public String getNeighbourhood() {
+        if (address != null && address.length > 0 && address[0].length > 0) {
+            return address[0][0];
+        }
+        return "Bairro Desconhecido";
+    }
+
+    public String getCity() {
+        if (address != null && address.length >= 2 && address[1].length > 0) {
+            return address[1][0];
+        }
+        return "Cidade Desconhecida";
+    }
 }

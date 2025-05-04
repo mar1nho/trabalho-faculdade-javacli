@@ -6,7 +6,7 @@ import java.util.List;
 
 public class EventsFileReader {
 
-    private final File file = new File("src/main/java/controllers/data/events.data");
+    private final File file = new File("src/main/resources/data/events.data");
 
     public List<String> getEventsRawFromFile() {
         ArrayList<String> eventsLine = new ArrayList<>();

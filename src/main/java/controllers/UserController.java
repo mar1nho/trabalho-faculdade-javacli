@@ -15,7 +15,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class UserController {
-    private final String filePath = "src/main/java/controllers/data/user-data.json";
+    private final String filePath = "src/main/resources/data/user-data.json";
+
     public boolean saveUserToJSON(UserModel user) {
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
 
@@ -31,19 +32,14 @@ public class UserController {
         } catch (IOException e) {
             Log.info("Error reading the file.");
         }
+
         for (UserModel exist : users) {
             if (exist.getUsername().equalsIgnoreCase(user.getUsername())) {
                 return false;
             }
         }
-        users.add(user);
 
-        for (UserModel exist : users) {
-            String neigh =  exist.getAddress()[0][0].toUpperCase();
-            String city = exist.getAddress()[0][1].toUpperCase();
-            String[][] r = new String[][] {new String[]{neigh}, new String[]{city}};
-            exist.setAddress(r);
-        }
+        users.add(user);
 
         try (FileWriter writer = new FileWriter(filePath)) {
             gson.toJson(users, writer);

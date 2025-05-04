@@ -8,11 +8,11 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Optional;
 
-public class LoginCLI {
+public class LoginCLI implements Runnable{
 
     private final UserService userService;
-
     private final String[] states = {"AC","AL","AP","AM","BA","CE","DF","ES","GO","MA","MT","MS","MG","PA","PB","PR","PE","PI","RJ","RN","RS","RO","RR","SC","SP","SE","TO"};
+    private boolean _authenticated = false;
 
     public LoginCLI() {
         userService = new UserService();
@@ -120,6 +120,7 @@ public class LoginCLI {
 
         boolean _auth_ = userService.loginAuthentication(usr,pwd);
         if(_auth_){
+            _authenticated = true;
             Optional<UserModel> user = userService.getAllUsers()
                     .stream()
                     .filter(u -> usr.equals(u.getUsername()))
@@ -128,7 +129,28 @@ public class LoginCLI {
                 UserScreenCLI userScreen = new UserScreenCLI(user.get());
                 userScreen._initialize();
             }
+        } else {
+            Log.info("Informações incorretas, insira credenciais válidas.");
+            try {
+                Thread.sleep(2000);
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
+            loginScreen();
+
         }
     }
 
+    @Override
+    public void run() {
+        while (true){
+            mainScreen();
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+                break;
+            }
+        }
+    }
 }

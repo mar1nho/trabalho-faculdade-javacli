@@ -10,9 +10,9 @@ import java.util.*;
 
 public class UserScreenCLI {
 
-    private List<EventModel> events;
+    private final List<EventModel> events;
     private final EventService eventService;
-    private UserModel mainUser;
+    private final UserModel mainUser;
 
     public UserScreenCLI(UserModel user) {
         this.mainUser = user;

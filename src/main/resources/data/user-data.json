@@ -1,0 +1,26 @@
+[
+  {
+    "username": "caito",
+    "password": "123121",
+    "address": [
+      [
+        "Diadema"
+      ],
+      [
+        "SP"
+      ]
+    ],
+    "eventsConfirmed": {}
+  },
+  {
+    "username": "MARINHO",
+    "password": "121199",
+    "address": [
+      [
+        "Vila Brasilina",
+        "sp"
+      ]
+    ],
+    "eventsConfirmed": {}
+  }
+]

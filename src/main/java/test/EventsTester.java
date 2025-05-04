@@ -13,32 +13,16 @@ import java.util.*;
 
 public class EventsTester implements Runnable {
 
-    private UserService userService;
-    private LoginCLI loginCLI = new LoginCLI();
-    private EventService eventService;
+    private final UserService userService = new UserService();
+    private final LoginCLI loginCLI = new LoginCLI();
+    private final EventService eventService = new EventService();;
 
     public EventsTester() {
-        this.userService = new UserService();
-        this.eventService = new EventService();
     }
 
     @Override
     public void run() {
-        /*UserService userService = new UserService();
-        Map<Integer, String> events = new HashMap<>();
-        UserModel userModel = new UserModel("medina", "121199", events);
-        if (userService.saveUser(userModel)){
-            Log.info("Sucesso ao salvar login!");
-        } else {
-            Log.info("Erro ao salvar login!");
-            Log.info("Username já em uso.");
-        }*/
-/*
-        List<UserModel> list = userService.getAllUsers();
-        list.forEach(u -> {
-            System.out.println(u.getUsername());
-        });*/
-        loginCLI.mainScreen();
+
 
     }
 
