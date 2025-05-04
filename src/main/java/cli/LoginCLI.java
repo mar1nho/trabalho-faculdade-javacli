@@ -4,12 +4,15 @@ import models.UserModel;
 import services.UserService;
 import utils.Log;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Optional;
 
 public class LoginCLI {
 
-    private UserService userService;
+    private final UserService userService;
+
+    private final String[] states = {"AC","AL","AP","AM","BA","CE","DF","ES","GO","MA","MT","MS","MG","PA","PB","PR","PE","PI","RJ","RN","RS","RO","RR","SC","SP","SE","TO"};
 
     public LoginCLI() {
         userService = new UserService();
@@ -51,8 +54,42 @@ public class LoginCLI {
         String pwd = Log.getUserInput();
         Log.input("Bairro: ");
         String neighborhood = Log.getUserInput();
-        Log.input("Cidade: ");
+        Log.input("Cidade (UF): ");
         String city = Log.getUserInput();
+
+        boolean isValid = false;
+
+        for (String s : states) {
+            if (city.equalsIgnoreCase(s)) {
+                isValid = true;
+                break;
+            }
+        }
+
+        if (!isValid) {
+            Log.info("Você deve inserir o código da UF do seu Estado:");
+            Log.info(Arrays.toString(states));
+            try {
+                Thread.sleep(2000);
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
+            registerScreen();
+        }
+
+
+
+        if(usr.isEmpty() || pwd.isEmpty() || neighborhood.isEmpty() || city.isEmpty()){
+            Log.info("Informações em branco, retornando ao registro, insira informações nos campos!!");
+            try {
+                Thread.sleep(2000);
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
+            registerScreen();
+        }
+
+
         if(userService.saveUser(new UserModel(usr,pwd, new HashMap<>(),new String[][]{{neighborhood.trim(), city.trim()}}))){
             Log.info("Parabéns, conta criada com sucesso!");
             Log.info("Retornando ao menu.");

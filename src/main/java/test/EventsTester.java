@@ -15,9 +15,11 @@ public class EventsTester implements Runnable {
 
     private UserService userService;
     private LoginCLI loginCLI = new LoginCLI();
+    private EventService eventService;
 
     public EventsTester() {
         this.userService = new UserService();
+        this.eventService = new EventService();
     }
 
     @Override
@@ -37,6 +39,7 @@ public class EventsTester implements Runnable {
             System.out.println(u.getUsername());
         });*/
         loginCLI.mainScreen();
+
     }
 
 }

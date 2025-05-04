@@ -46,4 +46,11 @@ public class UserModel {
     public void setEventsConfirmed(Map<Integer, String>eventsConfirmed) {
         this.eventsConfirmed = eventsConfirmed;
     }
+
+    public String getAddressesString() {
+        String neighbourhood = address[0][0];
+        String city = address[1][0];
+        return String.format("%s-%s", neighbourhood, city);
+    }
+
 }

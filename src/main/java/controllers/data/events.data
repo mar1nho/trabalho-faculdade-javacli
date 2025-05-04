@@ -11,3 +11,9 @@ Test Event3;Test Address3;FESTAS;01/05/2025 18:16:38;Test Description3
 {
 Lollapalooza 2026;Autódromo de Interlagos;SHOWS;01/05/2026 18:16:38;Muita música gostosa!
 }
+{
+Cantinho da Comida;VILA BRASILINA;EVENTOS;28/05/2025 18:16:38;Comida gostosa e caseira!
+}
+{
+Cantinho da Comida Master;VILA BRASILINA;EVENTOS;28/05/2025 00:00:00;Comida gostosa e caseira!
+}

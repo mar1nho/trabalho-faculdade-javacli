@@ -1,3 +1,15 @@
 [
-
+  {
+    "username": "marinho",
+    "password": "121199",
+    "address": [
+      [
+        "VILA BRASILINA"
+      ],
+      [
+        "SP"
+      ]
+    ],
+    "eventsConfirmed": {}
+  }
 ]

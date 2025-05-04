@@ -6,8 +6,7 @@ import services.EventService;
 import utils.Log;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 public class UserScreenCLI {
 
@@ -47,13 +46,13 @@ public class UserScreenCLI {
                 .filter(dataEvento -> dataEvento.isAfter(now))
                 .count();
 
-        Log.info("Total of ended events since launch: " + pastEvents);
-        Log.info("Future events coming: " + futureEvents + "\n");
-        Log.info("Escolha uma opção abaixo:");
+        Log.info("Total de eventos encerrados desde o lançamento: " + pastEvents);
+        Log.info("Total de eventos próximos: " + futureEvents + "\n");
+        Log.info("Escolha uma opção abaixo:\n");
         Log.info("[1] Meus Eventos");
         Log.info("[2] Próximos Eventos");
         Log.info("[3] Eventos Passados");
-        Log.info("[4] Próximo de mim");
+        Log.info("[4] Próximo de mim\n");
         Log.input("");
         String res = Log.getUserInput();
 
@@ -65,14 +64,30 @@ public class UserScreenCLI {
         }
     }
 
-    public void nextToMe(){
+    public void nextToMe() {
         Log.ascii();
         Log.info("Username: " + mainUser.getUsername());
-        Log.info("Próximos ao bairro de " + mainUser.getAddress());
 
+        String neighborhood = mainUser.getAddressesString().split("-")[0].trim();
+        Log.info("Próximos ao bairro de " + neighborhood + "\n");
 
-        eventsGeneralStats();
+        List<EventModel> events = eventService.loadEventListAsModel();
+        Set<String> processedEvents = new HashSet<>();
+
+        for (EventModel event : events) {
+            String eventKey = event.getName() + " - " + event.getAddress() + " - " + event.getDate().format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm"));
+
+            if (event.getDate().isAfter(LocalDateTime.now()) &&
+                    event.getAddress().toLowerCase().contains(neighborhood.toLowerCase()) &&
+                    !processedEvents.contains(eventKey)) {
+
+                Log.info(eventKey);
+                processedEvents.add(eventKey);
+            }
+        }
     }
+
+
 
     public void showEvents(){
         System.out.println(" ");

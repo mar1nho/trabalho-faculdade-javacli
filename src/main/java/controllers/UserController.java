@@ -37,6 +37,14 @@ public class UserController {
             }
         }
         users.add(user);
+
+        for (UserModel exist : users) {
+            String neigh =  exist.getAddress()[0][0].toUpperCase();
+            String city = exist.getAddress()[0][1].toUpperCase();
+            String[][] r = new String[][] {new String[]{neigh}, new String[]{city}};
+            exist.setAddress(r);
+        }
+
         try (FileWriter writer = new FileWriter(filePath)) {
             gson.toJson(users, writer);
             return true;
